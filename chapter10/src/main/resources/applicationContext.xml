@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+    <!--   1.加载db.properties数据库信息文件 -->
+    <!--  如果遇到@Deprecated的过时类，1.查看文档是有指导 -->
+    <bean id="config" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations"><!-- 可以加载多个配置文件! -->
+            <array>
+                <value>classpath:db.properties</value><!--  将会放置到id为dataSource的bean中    -->
+            </array>
+        </property>
+        <property name="fileEncoding">
+            <value>UTF-8</value>
+        </property>
+<!--        <context:property-placeholder location="classpath:db.properties" />-->
+    </bean>
+
+    <!--    2.配置数据库信息(替代mybatis的配置文件conf.xml;<不由mybatis的配置文件conf.xml关联数据库了，
+                            而是交给spring配置文件关联>)
+
+            PropertyPlaceholderConfigurer(id=config的bean)起的作用就是将占位符(driver、url、username、password)指向的数据库配置信息放在dataSource的bean中.
+
+            自动提交:增、删、改时dbcp帮会自动提交
+     -->
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          p:driverClassName="${driver}"
+          p:url="${url}"
+          p:username="${username}"
+          p:password="${password}"
+          p:initialSize="5"
+          p:maxConn="10"/>
+
+
+</beans>

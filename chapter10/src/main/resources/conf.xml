@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 数据库信息，被PropertySourcesPlaceholderConfigurer和PropertySourcesPlaceholderConfigurer替代！ -->
+
+
+    <!-- 加载映射文件 selectStudentMapper.xml，第一种方式用到,不配置mapperLocations时！   -->
+<!--        <mappers>-->
+<!--            <mapper resource="org/legend/springMybatis/mapper/selectstudentMapper1.xml"/>-->
+<!--            <mapper resource="org/legend/springMybatis/mapper/selectstudentMapper2.xml"/>-->
+<!--        </mappers>-->
+</configuration>
